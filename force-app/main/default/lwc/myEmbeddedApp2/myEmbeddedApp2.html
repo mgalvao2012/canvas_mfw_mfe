@@ -1,0 +1,20 @@
+<template>
+    <div class="row">
+        <div class="column">
+            <h2>Internal {embeddingInternalUrl}</h2>
+            <lightning-ui-embedding
+                src={embeddingInternalUrl}
+                sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-modals"
+                shell-title="LWC Embedding Internal URL">
+            </lightning-ui-embedding> 
+        </div>
+        <div class="column">
+            <h2>External {embeddingExternalUrl}</h2>
+            <lightning-ui-embedding
+                src={embeddingExternalUrl}
+                sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-modals"
+                shell-title="LWC Embedding External URL">
+            </lightning-ui-embedding> 
+        </div>
+    </div>
+</template>

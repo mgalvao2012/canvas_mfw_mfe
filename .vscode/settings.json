@@ -1,0 +1,21 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.sf": true,
+    "**/.sfdx": true
+  },
+  "xml.preferences.showSchemaDocumentationType": "none",
+  "vibes.salesforce.defaultOrg": "sdo-261007",
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#ba0517",
+    "statusBar.foreground": "#ffffff",
+    "statusBar.border": "#ba0517",
+    "statusBarItem.hoverBackground": "#c63241",
+    "statusBarItem.remoteBackground": "#890b17",
+    "statusBarItem.remoteForeground": "#ffffff",
+    "activityBar.activeBorder": "#ba0517",
+    "activityBarBadge.background": "#ba0517",
+    "activityBarBadge.foreground": "#ffffff"
+  }
+}
