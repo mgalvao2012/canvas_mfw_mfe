@@ -1,0 +1,77 @@
+import { useEffect } from 'react';
+import { RefreshCw } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useAccountId } from '@/hooks/useAccountId';
+import { useOpportunities } from '@/hooks/useOpportunities';
+import StagePieChart from '@/components/opportunity/StagePieChart';
+import OpportunityTable from '@/components/opportunity/OpportunityTable';
+import NewOpportunityDialog from '@/components/opportunity/NewOpportunityDialog';
+
+export default function OpportunityManagerPage() {
+  const accountId = useAccountId();
+
+  useEffect(() => {
+    document.title = 'Opportunity Manager';
+  }, []);
+
+  if (!accountId) {
+    return (
+      <p role="alert" className="p-6 text-sm text-muted-foreground">
+        Open this component from an Account record page.
+      </p>
+    );
+  }
+
+  return <AccountOpportunities accountId={accountId} />;
+}
+
+function AccountOpportunities({ accountId }: { accountId: string }) {
+  const { opportunities, byStage, loading, error, refetch } = useOpportunities(accountId);
+
+  return (
+    <div className="grid gap-4 p-4">
+      <Card>
+        <CardHeader>
+          <CardTitle>Open Pipeline by Stage</CardTitle>
+          <CardAction>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={refetch}
+              disabled={loading}
+              aria-label="Refresh"
+              title="Refresh"
+            >
+              <RefreshCw className={loading ? 'animate-spin' : undefined} />
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          {loading ? <Skeleton className="h-72 w-full" /> : <StagePieChart data={byStage} />}
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Open Opportunities</CardTitle>
+          <CardAction>
+            <NewOpportunityDialog accountId={accountId} onCreated={refetch} />
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          {error ? (
+            <p role="alert" className="text-sm text-destructive">
+              {error}
+            </p>
+          ) : loading ? (
+            <Skeleton className="h-40 w-full" />
+          ) : (
+            <OpportunityTable opportunities={opportunities} />
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

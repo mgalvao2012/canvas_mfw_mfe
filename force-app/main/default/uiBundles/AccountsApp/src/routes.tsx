@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import { Search as GlobalSearch, config } from "./features/search";
 import AccountObjectDetail from "./pages/AccountObjectDetailPage";
+import SciChartDemo from "./pages/SciChartDemo";
+import FiscalFlow from "./pages/FiscalFlow";
 
 export const routes: RouteObject[] = [
   {
@@ -25,6 +27,16 @@ export const routes: RouteObject[] = [
 					/>
 				),
         handle: { showInNavigation: true, label: "Search" }
+      },
+      {
+        path: "scichart",
+        element: <SciChartDemo />,
+        handle: { showInNavigation: true, label: "SciChart Demo" }
+      },
+      {
+        path: "fiscal-flow",
+        element: <FiscalFlow />,
+        handle: { showInNavigation: true, label: "Fiscal Flow" }
       },
       {
         path: "accounts/:recordId",

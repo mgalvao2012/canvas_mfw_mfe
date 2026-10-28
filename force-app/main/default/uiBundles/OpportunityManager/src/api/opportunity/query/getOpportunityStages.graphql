@@ -1,0 +1,22 @@
+query GetOpportunityStages {
+	uiapi {
+		objectInfos(objectInfoInputs: [{ apiName: "Opportunity", fieldNames: ["StageName"] }]) {
+			defaultRecordTypeId
+			fields {
+				ApiName
+				... on PicklistField {
+					picklistValuesByRecordTypeIDs {
+						recordTypeID
+						defaultValue {
+							value
+						}
+						picklistValues {
+							label
+							value
+						}
+					}
+				}
+			}
+		}
+	}
+}

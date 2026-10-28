@@ -1,0 +1,4 @@
+/* Fixed height: the iframe does not auto-size to the React content (chart ~300px + table). */
+.frame {
+  height: 680px;
+}

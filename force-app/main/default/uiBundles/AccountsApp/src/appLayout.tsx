@@ -1,4 +1,3 @@
-import { AgentforceConversationClient } from "./components/AgentforceConversationClient";
 import { Outlet, Link, useLocation } from "react-router";
 import { getAllRoutes } from "./router-utils";
 import { useEffect, useId, useRef, useState } from "react";
@@ -113,7 +112,9 @@ export default function AppLayout() {
 			<div id="main-content" ref={outletWrapperRef}>
 				<Outlet />
 			</div>
-			<AgentforceConversationClient agentId="0Xxak000004IEi9CAG" />
+
 		</>
 	);
 }
+/* <AgentforceConversationClient agentId="0Xxak000004IEi9CAG" /> */
+

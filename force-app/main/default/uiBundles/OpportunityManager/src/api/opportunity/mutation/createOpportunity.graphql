@@ -1,0 +1,9 @@
+mutation CreateOpportunity($input: OpportunityCreateInput!) {
+	uiapi {
+		OpportunityCreate(input: $input) {
+			Record {
+				Id
+			}
+		}
+	}
+}

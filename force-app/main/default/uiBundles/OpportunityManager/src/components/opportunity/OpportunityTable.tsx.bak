@@ -1,0 +1,58 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { opportunityRecordUrl, type Opportunity } from '@/lib/opportunity';
+
+export default function OpportunityTable({
+  opportunities,
+}: {
+  opportunities: Opportunity[];
+}) {
+  if (opportunities.length === 0) {
+    return (
+      <p className="py-8 text-center text-sm text-muted-foreground">
+        No open opportunities for this account.
+      </p>
+    );
+  }
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Opportunity Name</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
+          <TableHead>Stage</TableHead>
+          <TableHead>Close Date</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {opportunities.map(opp => (
+          <TableRow key={opp.id}>
+            <TableCell>
+              {/* The embedding iframe is sandboxed without allow-top-navigation, so records open in a new tab. */}
+              <a
+                href={opportunityRecordUrl(opp.id)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-blue-700 hover:underline"
+              >
+                {opp.name}
+              </a>
+            </TableCell>
+            <TableCell className="text-right tabular-nums">
+              {opp.amountDisplay ?? '—'}
+            </TableCell>
+            <TableCell>{opp.stageLabel}</TableCell>
+            <TableCell>{opp.closeDateDisplay ?? '—'}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}

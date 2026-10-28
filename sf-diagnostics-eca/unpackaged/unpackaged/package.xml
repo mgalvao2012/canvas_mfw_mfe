@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>NodeCrudEca</members>
+        <name>ExternalClientApplication</name>
+    </types>
+    <types>
+        <members>NodeCrudEca_canvas</members>
+        <name>ExtlClntAppCanvasSettings</name>
+    </types>
+    <types>
+        <members>NodeCrudEca_plcy</members>
+        <name>ExtlClntAppConfigurablePolicies</name>
+    </types>
+    <types>
+        <members>NodeCrudEca_glbloauth</members>
+        <name>ExtlClntAppGlobalOauthSettings</name>
+    </types>
+    <types>
+        <members>NodeCrudEca_oauthPlcy</members>
+        <name>ExtlClntAppOauthConfigurablePolicies</name>
+    </types>
+    <types>
+        <members>NodeCrudEca_oauth</members>
+        <name>ExtlClntAppOauthSettings</name>
+    </types>
+    <version>67.0</version>
+</Package>

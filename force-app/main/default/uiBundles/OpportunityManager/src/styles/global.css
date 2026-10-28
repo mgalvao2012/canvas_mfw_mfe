@@ -1,0 +1,156 @@
+@import 'tailwindcss';
+
+@layer base {
+  html,
+  body,
+  #root {
+    @apply min-h-screen;
+  }
+
+  /* Transparent so the LEX page surface shows through the embedding iframe. */
+  body {
+    @apply antialiased bg-transparent;
+  }
+}
+
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand-hover: var(--slds-brand-hover);
+  --color-link: var(--slds-link);
+  --color-heading: var(--slds-heading);
+  --color-surface-alt: var(--slds-surface-alt);
+  --color-border-strong: var(--slds-border-strong);
+  --color-success: var(--slds-success);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* SLDS 2 (Cosmos) values. The app runs in an iframe on *.salesforce.app, so LEX
+     global styling hooks are not inherited; the fallbacks are what actually renders. */
+  --font-sans: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  --radius: 0.5rem;
+  --slds-brand: var(--slds-g-color-accent-1, #0176d3);
+  --slds-brand-hover: var(--slds-g-color-accent-3, #014486);
+  --slds-link: var(--slds-g-color-accent-2, #0b5cab);
+  --slds-heading: var(--slds-g-color-on-surface-3, #03234d);
+  --slds-text-weak: var(--slds-g-color-on-surface-1, #5c5c5c);
+  --slds-border-strong: var(--slds-g-color-border-2, #c9c9c9);
+  --slds-surface-alt: var(--slds-g-color-surface-container-2, #f3f3f3);
+  --slds-success: var(--slds-g-color-success-1, #2e844a);
+
+  --background: var(--slds-g-color-surface-1, #ffffff);
+  --foreground: var(--slds-g-color-on-surface-2, #2e2e2e);
+  --card: var(--slds-g-color-surface-container-1, #ffffff);
+  --card-foreground: var(--slds-g-color-on-surface-2, #2e2e2e);
+  --popover: var(--slds-g-color-surface-container-1, #ffffff);
+  --popover-foreground: var(--slds-g-color-on-surface-2, #2e2e2e);
+  --primary: var(--slds-brand);
+  --primary-foreground: var(--slds-g-color-on-accent-1, #ffffff);
+  --secondary: var(--slds-surface-alt);
+  --secondary-foreground: var(--slds-g-color-on-surface-2, #2e2e2e);
+  --muted: var(--slds-surface-alt);
+  --muted-foreground: var(--slds-text-weak);
+  --accent: var(--slds-surface-alt);
+  --accent-foreground: var(--slds-g-color-on-surface-2, #2e2e2e);
+  --destructive: var(--slds-g-color-error-1, #ba0517);
+  --destructive-foreground: var(--slds-g-color-on-error-1, #ffffff);
+  --border: var(--slds-g-color-border-1, #e5e5e5);
+  --input: var(--slds-border-strong);
+  --ring: var(--slds-brand);
+  --chart-1: #0176d3;
+  --chart-2: #2e844a;
+  --chart-3: #dd7a01;
+  --chart-4: #9050e9;
+  --chart-5: #ba0517;
+  --sidebar: var(--slds-surface-alt);
+  --sidebar-foreground: var(--slds-g-color-on-surface-2, #2e2e2e);
+  --sidebar-primary: var(--slds-brand);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--slds-surface-alt);
+  --sidebar-accent-foreground: var(--slds-g-color-on-surface-2, #2e2e2e);
+  --sidebar-border: var(--slds-g-color-border-1, #e5e5e5);
+  --sidebar-ring: var(--slds-brand);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply text-foreground font-sans text-[0.8125rem];
+  }
+}

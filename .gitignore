@@ -5,6 +5,7 @@
 # Salesforce cache
 .sf/
 .sfdx/
+.sf-diagnostics/
 .localdevserver/
 deploy-options.json
 
@@ -23,6 +24,7 @@ yarn-error.log*
 
 # Dependency directories
 node_modules/
+force-app/main/default/uiBundles/*/dist/*
 
 # ApexPMD cache
 .pmdCache
