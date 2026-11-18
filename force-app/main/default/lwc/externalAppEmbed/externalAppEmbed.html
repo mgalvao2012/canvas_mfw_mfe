@@ -1,0 +1,14 @@
+<template>
+    <template lwc:if={hasError}>
+        <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <h2>Não foi possível carregar a aplicação externa. Verifique a URL, a disponibilidade do serviço e as configurações de segurança (CSP Trusted Sites / X-Frame-Options).</h2>
+        </div>
+    </template>
+    <div class="slds-is-relative" style={containerStyle}>
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Carregando aplicação" size="medium"></lightning-spinner>
+        </template>
+        <div class="host" lwc:dom="manual" style="height: 100%;"></div>
+    </div>
+</template>

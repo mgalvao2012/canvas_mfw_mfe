@@ -1,4 +1,4 @@
-# sdo-261007-prod
+# demo-org
 
 ## Gotchas
 
@@ -9,7 +9,7 @@
 - **[OPEN, 2026-10-09] ACC 12.11.0 floating FAB never shows in desktop browsers**, even with valid active Employee agent + agent access. LO emits `ready` but `runtime_copilot-acc-sdk-wrapper` never fires `accready`; bridge `open()` stays pending; no console errors. Ruled out: LEX embedding (fails top-level too), Chrome profile/extensions (Safari fails too), form factor (Chrome iPhone emulation fails too). Only Salesforce Mobile App WebView shows the FAB. Undocumented — escalate, don't keep guessing.
 - **`sf template generate ui-bundle -t reactbasic` output needs fixes before use**: the `uibundle-meta.xml` comes without `<target>` (add `CustomApplication`); `vitest.config.ts` has no `@` alias, so any test importing `@/...` fails with "Failed to resolve import"; and it creates a `.graphqlrc.yml` at the project root.
 - **Record links from a UI bundle embedded via `lightning-ui-embedding`**: the app runs on `*.my.salesforce.app`, so a relative `/lightning/r/...` doesn't resolve, and the sandbox has no `allow-top-navigation`, so `_top` fails. Use an absolute `*.lightning.force.com` URL with `target="_blank"`.
-- **`sdo-261007-prod` is a Production org** — the deploy-gate hook blocks `sf project deploy start`; validate first and get explicit approval.
+- **`demo-org` is a Production org** — the deploy-gate hook blocks `sf project deploy start`; validate first and get explicit approval.
 - **Permission set with Read Account fails to deploy without Read Contact** in this org ("Permission Read Account depends on permission(s): Read Contact"). Grant both or leave Account out.
 - **`lightning-ui-embedding` keeps the iframe `visibility: hidden` (`data-state="pre-heartbeat"`) until the embedded app posts `{ type: "sf-embedding/ready", protocolVersion: "1.0.0", instanceId }` to `hostAppOrigin`** (both come from the `?hostMetaData=` param the host appends). Neither the `reactbasic` template nor `@salesforce/platform-sdk` sends it automatically. Each UI bundle needs `public/sf-embedding-heartbeat.js` (copy from AccountsApp) loaded in `index.html`, otherwise it renders blank in LEX even though the direct URL works.
 - **`@salesforce/platform-sdk` `graphql.query` caches responses for 300s by default (max-age)**, so re-running the same query after a mutation returns the pre-mutation data with no error. Pass `cacheControl: 'no-cache'` (or call `result.refresh()`) for lists that need to reflect a create/update.

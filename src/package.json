@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-financial-accounts",
+  "version": "1.0.0",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "tunnel": "node --env-file=.env tunnel.js"
+  },
+  "engines": { "node": ">=22.13" },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

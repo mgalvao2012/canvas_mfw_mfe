@@ -1,0 +1,144 @@
+[
+  {
+    "accountId": "001ak00003hohvoAAA",
+    "financialAccounts": [
+      {
+        "financialAccountNumber": "8821-1001-CC",
+        "category": "Conta Corrente",
+        "productName": "Conta Corrente Alta Renda",
+        "modality": "Depósito à Vista",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Saldo",
+        "amount": 28450.00,
+        "mainConditions": "Isenção de cesta por volume investido"
+      },
+      {
+        "financialAccountNumber": "8821-2001-IV",
+        "category": "Investimentos",
+        "productName": "CDB Liquidez Diária",
+        "modality": "Renda Fixa Pós-fixada",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Saldo",
+        "amount": 150000.00,
+        "mainConditions": "Rentabilidade de 100% do CDI"
+      },
+      {
+        "financialAccountNumber": "8821-4409-SC",
+        "category": "Investimentos",
+        "productName": "Conta Investimento Global",
+        "modality": "Renda Variável / ETFs",
+        "currencyIsoCode": "USD",
+        "status": "Ativo",
+        "amountType": "Saldo",
+        "amount": 45200.00,
+        "mainConditions": "Custódia isenta e remessa integrada"
+      },
+      {
+        "financialAccountNumber": "8821-2002-IV",
+        "category": "Investimentos",
+        "productName": "Fundo Multimercado Macro",
+        "modality": "Fundo de Investimento",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Saldo",
+        "amount": 85000.00,
+        "mainConditions": "Taxa de adm. 1,5% a.a. / Resgate D+1"
+      },
+      {
+        "financialAccountNumber": "8821-3001-CT",
+        "category": "Cartões",
+        "productName": "Cartão Visa Infinite",
+        "modality": "Cartão de Crédito",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Limite",
+        "amount": 60000.00,
+        "mainConditions": "2,2 pontos por dólar e acesso a salas VIP"
+      },
+      {
+        "financialAccountNumber": "8821-4001-CR",
+        "category": "Crédito",
+        "productName": "Financiamento Imobiliário",
+        "modality": "Crédito Imobiliário (SAC)",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Saldo Devedor",
+        "amount": 420000.00,
+        "mainConditions": "Taxa de 9,8% a.a. + TR (180 meses)"
+      },
+      {
+        "financialAccountNumber": "8821-4002-CR",
+        "category": "Crédito",
+        "productName": "Crédito Pessoal Pré-Aprovado",
+        "modality": "Empréstimo Pessoal",
+        "currencyIsoCode": "BRL",
+        "status": "Disponível",
+        "amountType": "Limite",
+        "amount": 95000.00,
+        "mainConditions": "Taxa a partir de 1,89% a.m."
+      },
+      {
+        "financialAccountNumber": "8821-5001-PR",
+        "category": "Previdência",
+        "productName": "Plano VGBL Balanceado",
+        "modality": "Previdência Privada",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Acumulado",
+        "amount": 110000.00,
+        "mainConditions": "Aporte mensal programado de R$ 1.500,00"
+      },
+      {
+        "financialAccountNumber": "8821-6001-SG",
+        "category": "Seguros",
+        "productName": "Seguro de Vida Resgatável",
+        "modality": "Proteção Pessoal",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Cobertura",
+        "amount": 500000.00,
+        "mainConditions": "Prêmio mensal de R$ 240,00"
+      },
+      {
+        "financialAccountNumber": "8821-7001-CS",
+        "category": "Consórcio",
+        "productName": "Carta de Crédito Veículos",
+        "modality": "Consórcio",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Crédito",
+        "amount": 120000.00,
+        "mainConditions": "Taxa de adm. total de 14% (36/60 pagas)"
+      }
+    ]
+  },
+  {
+    "accountId": "001ak00003hohvnAAA",
+    "financialAccounts": [
+      {
+        "financialAccountNumber": "9910-1001-CC",
+        "category": "Conta Corrente",
+        "productName": "Conta Corrente",
+        "modality": "Depósito à Vista",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Saldo",
+        "amount": 8450.00,
+        "mainConditions": null
+      },
+      {
+        "financialAccountNumber": "9910-2001-IV",
+        "category": "Investimentos",
+        "productName": "CDB Liquidez Diária",
+        "modality": "Renda Fixa Pós-fixada",
+        "currencyIsoCode": "BRL",
+        "status": "Ativo",
+        "amountType": "Saldo",
+        "amount": 15000.00,
+        "mainConditions": "Rentabilidade de 100% do CDI"
+      }
+    ]
+  }
+]

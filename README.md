@@ -1,58 +1,76 @@
-# Salesforce DX Project
 
-Salesforce DX is a development approach that brings source-driven development, team collaboration, and continuous integration to the Salesforce Platform. Instead of working directly in an org through a web browser, you work with metadata as source files in a local DX project, track changes in version control, and deploy through automated processes.
+Canvas SDK, MFW (Multi-framework) and MFE (Micro-FrontEnd)
 
-This project template gets you started with the tools and structure you need to build Salesforce applications using source control, scratch orgs, and the Salesforce CLI.
+Salesforce DX project for the demonstration purpose: React UI Bundles running in Lightning Experience, a Node.js micro frontend (financial accounts) embedded in the Account record page, and a Node.js CRUD app opened from a tab with Canvas SSO.
+
+> **Production org.** The deploy-gate hook blocks `sf project deploy start`: validate first and get explicit approval before deploying.
+
+- **React UI Bundles** (`force-app/main/default/uiBundles/`): `AccountsApp` and `OpportunityManager`. Each is a Custom Application with its own `*_Access` permission set.
+- **Opportunity Manager on the Account page:** `opportunityManagerEmbed` renders the `OpportunityManager` bundle through `lightning-ui-embedding`.
+- **Financial accounts on the Account page:** `externalAppEmbed` embeds the Node.js app in `src/` (SQLite, served through a Cloudflare tunnel) in an iframe, using `lwc-shell` and passing the record id.
+- **CRUD App (tab):** the **CRUD App** tab opens the Visualforce page `NodeCrudCanvasEca`, which renders the Canvas app `NodeCrudEca` (External Client App, Signed Request POST). The Node.js + PostgreSQL CRUD app signs the user in automatically (Canvas SSO). Its code, setup and security model live in [https://github.com/mgalvao2012/nodejs-sso-salesforce](https://github.com/mgalvao2012/nodejs-sso-salesforce); see [docs/architecture.md](docs/architecture.md#crud-app-canvas-sso).
+- **Dev tunnel:** `npm run dev:tunnel` starts the tunnel and the app, writes the new URL into the metadata and deploys it.
+
+```mermaid
+flowchart LR
+  USER["User in Lightning"] --> PAGE["Account record page"]
+  PAGE --> OPP["opportunityManagerEmbed"]
+  PAGE --> EXT["externalAppEmbed"]
+  OPP -- "lightning-ui-embedding" --> RB["OpportunityManager<br/>React UI Bundle"]
+  USER --> TAB["CRUD App tab"]
+  TAB --> VF["NodeCrudCanvasEca (Visualforce)"]
+  VF -- "Canvas SSO (NodeCrudEca)" --> CRUD["Node.js CRUD app<br/>(nodejs-sso-salesforce repo)"]
+  EXT -- "lwc-shell iframe" --> TUN["Cloudflare tunnel"]
+  TUN --> NODE["Node.js app (src/)"]
+  NODE --> DB[("SQLite")]
+  RB -- "GraphQL" --> SF["Salesforce data"]
+```
+
+Full component and sequence diagrams are in [docs/architecture.md](docs/architecture.md).
 
 ## Prerequisites
 
-Before you start, make sure you have:
+- Node.js 22.13 or newer (the `src/` app uses `node:sqlite`), Salesforce CLI 2 (`sf`), `jq`, `curl`, `lsof`, `cloudflared`
+- Access to the **demo-org** with a user that can deploy metadata and assign permission sets
 
-- **Salesforce CLI** - Download from [developer.salesforce.com/tools/salesforcecli](https://developer.salesforce.com/tools/salesforcecli). See [Install Salesforce CLI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm) for details.
-- **VS Code with Salesforce Extension Pack** - See [Installation Instructions](https://developer.salesforce.com/docs/platform/sfvscode-extensions/guide/install.html) for details. Includes the Agentforce Vibes extension.
-- **A development org** - Sign up for a free Developer Edition org [here](https://developer.salesforce.com/signup).
-- **Dev Hub enabled** (optional, required to create scratch orgs) - You can enable Dev Hub in your development org under Setup > Dev Hub.  See [Provide Developers Access to Salesforce DX Tools](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_setup_dx_tools.htm).
+Details are in [docs/setup.md](docs/setup.md#prerequisites).
 
-## Project Structure
+## Quick start
 
-Your DX project follows this structure:
+```bash
+npm install
+sf org login web --alias demo-org
+sf config set target-org demo-org
 
-- **`force-app/main/default/`** - Your metadata source files live in this default package directory. You can configure additional package directories in the `sfdx-project.json` file.
-- **`config/`** - Scratch org definitions and project settings
-- **`scripts/`** - Automation scripts for common tasks
-- **`sfdx-project.json`** - Project manifest that defines package directories, namespace, API version, and other project-level settings
+# Node.js app for the financial accounts embed
+(cd src && npm install && cp .env.example .env)   # then set SF_ORIGIN in src/.env
 
-See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm).
+# Validate only (org is not changed), then deploy after approval
+npm run dev:tunnel -- --validate-only
+npm run dev:tunnel
+```
 
-## Get Started
+Then open an Account record page in Lightning Experience (desktop). On **person** accounts (`Record.IsPersonAccount = true`) the **External app** panel loads the financial accounts table; on business accounts the Opportunity Manager panel is shown instead.
 
-Ready to start developing? The [Get Started with Salesforce DX](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_get_started_dx.htm) guide walks you through your first project, from creating a scratch org to creating a simple Apex class or LWC to deploying your code to a sandbox.
+## Documentation
 
-## Common Salesforce CLI Commands
+| Document | Contents |
+|---|---|
+| [docs/architecture.md](docs/architecture.md) | Components, sequence diagrams, embedding protocol, repository layout |
+| [docs/setup.md](docs/setup.md) | Prerequisites and step-by-step setup (org, Node app, metadata, page activation, CRUD App pointer) |
+| [docs/configuration.md](docs/configuration.md) | `src/.env` variables, npm scripts, metadata that carries the app URL |
+| [docs/operations.md](docs/operations.md) | Dev tunnel, validate and deploy, UI Bundle build, page activation |
+| [docs/security.md](docs/security.md) | CSP, iframe sandbox, origin checks, data exposure, residual risks |
+| [docs/troubleshooting.md](docs/troubleshooting.md) | Blank embeds, tunnel and deploy errors, platform gotchas |
 
-Here are common CLI commands that you'll use the most:
+## Development
 
-- `sf org login web`: Authorize an org
-- `sf org open`: Open your org in a browser
-- `sf org create scratch`: Create a scratch org
-- `sf project deploy start`: Deploy metadata to your org
-- `sf project retrieve start`: Retrieve metadata from your org
-- `sf template generate <artifact>`: Scaffold new components, such as Apex classes and triggers, LWC components, Lightning apps, and more
-- `sf apex <command>`: Run Apex tests, run anonymous Apex blocks, and view logs
-- `sf data <command>`: Work with test data
-- `sf alias <command>`: Manage org aliases
-- `sf config <command>`: Configure CLI settings
+```bash
+npm run lint          # ESLint for LWC and Aura
+npm test              # LWC Jest
+npm run prettier      # format metadata and sources
+```
 
-## Use Agentforce Vibes to Build Lightning Apps
+Each UI Bundle has its own `package.json` (`cd force-app/main/default/uiBundles/<name> && npm install && npm run dev`).
 
-Transform your ideas into custom Lightning apps that extend CRM workflows directly in Lightning Experience. Through natural conversations with Agentforce Vibes, implement custom objects and fields, complex business logic, and dynamic UI components. See [Build a Lightning App Using Agentforce Vibes](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/lexapp-overview.html).
-
-## Additional Resources
-
-- [Agentforce Vibes Developer Guide](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/einstein-overview.html)
-- [Salesforce CLI Installation Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/)
-- [Salesforce CLI Plugin Development Guide](https://developer.salesforce.com/docs/platform/salesforce-cli-plugin/guide/conceptual-overview.html)
-- [Salesforce VS Code Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-
+Tech stack: Salesforce API 67.0, LWC, React + Vite + TypeScript + Tailwind + shadcn/ui (UI Bundles), Express 4 + `node:sqlite` (`src/`), `@salesforce/experimental-mfe-lwc-shell` 2.2.4 (vendored as `vendorLwcShell`), Cloudflare quick tunnels.

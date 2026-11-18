@@ -1,0 +1,30 @@
+/* Tokens aproximados do Design System Liquid (Bradesco).
+   [UNKNOWN] Storybook não foi acessível; substituir pelos tokens oficiais (@bradesco/liquid). */
+:root {
+  --ds-color-brand: #cc092f;
+  --ds-color-brand-dark: #a30726;
+  --ds-color-text: #2b2b2b;
+  --ds-color-text-muted: #6b6b6b;
+  --ds-color-border: #e0e0e0;
+  --ds-color-surface: #ffffff;
+  --ds-color-surface-alt: #f5f5f5;
+  --ds-color-success-bg: #e3f5e8; --ds-color-success: #1b7a3a;
+  --ds-color-info-bg: #e3eefb;    --ds-color-info: #1a56a0;
+  --ds-radius: 8px;
+  --ds-font: 'Open Sans', 'Segoe UI', Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--ds-font); color: var(--ds-color-text); background: var(--ds-color-surface); font-size: 14px; }
+.ds-container { padding: 16px; }
+.ds-title { margin: 0 0 12px; font-size: 20px; font-weight: 700; color: var(--ds-color-brand); }
+.ds-helper { color: var(--ds-color-text-muted); }
+.ds-table-wrapper { overflow-x: auto; border: 1px solid var(--ds-color-border); border-radius: var(--ds-radius); }
+.ds-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+.ds-table th { background: var(--ds-color-brand); color: #fff; text-align: left; font-weight: 600; padding: 12px; white-space: nowrap; }
+.ds-table td { padding: 12px; border-top: 1px solid var(--ds-color-border); vertical-align: top; }
+.ds-table tbody tr:nth-child(even) { background: var(--ds-color-surface-alt); }
+.ds-table tbody tr:hover { background: #fdecef; }
+.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ds-tag { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--ds-color-info-bg); color: var(--ds-color-info); }
+.ds-tag.ativo { background: var(--ds-color-success-bg); color: var(--ds-color-success); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }

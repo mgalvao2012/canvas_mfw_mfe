@@ -5,7 +5,7 @@
       "default": true
     }
   ],
-  "name": "sdo-261007-prod",
+  "name": "demo-org",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "67.0"
