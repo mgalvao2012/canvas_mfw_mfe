@@ -1,5 +1,5 @@
 
-Canvas SDK, MFW (Multi-framework) and MFE (Micro-FrontEnd)
+# Canvas SDK, MFW (Multi-framework) and MFE (Micro-FrontEnd)
 
 Salesforce DX project for the demonstration purpose: React UI Bundles running in Lightning Experience, a Node.js micro frontend (financial accounts) embedded in the Account record page, and a Node.js CRUD app opened from a tab with Canvas SSO.
 
